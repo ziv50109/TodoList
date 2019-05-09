@@ -1,0 +1,58 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #eee;
+}
+
+.App {
+    position: relative;
+    max-width: 500px;
+}
+.todolist_header {
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
+    input {
+        border: none;
+        outline: none;
+        width: 100%;
+        padding: 15px;
+        ::placeholder {
+            color: #fefefe;
+        }
+    }
+}
+
+.todolist_body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    li {
+        display: flex;
+        align-items: center;
+        padding: 15px 0;
+        &:hover {
+            .todolist-del {
+                display: block;
+            }
+        }
+    }
+    .todolist-radio {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        background-color: #fff;
+        border-radius: 100%;
+        background-image: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22…2none%22%20stroke%3D%22%23ededed%22%20stroke-width%3D%223%22/%3E%3C/svg%3E);
+        &.over {
+            background-color: #f44;
+        }
+    }
+    .todolist-del {
+        display: none;
+        padding: 10px;
+        margin-left: auto;
+        cursor: pointer;
+    }
+}
