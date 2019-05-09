@@ -6,53 +6,80 @@ body {
     background-color: #eee;
 }
 
+$className: 'todolist';
+
 .App {
-    position: relative;
     max-width: 500px;
 }
-.todolist_header {
-    border-bottom: 1px solid #eee;
-    background-color: #fff;
-    input {
-        border: none;
-        outline: none;
-        width: 100%;
-        padding: 15px;
-        ::placeholder {
-            color: #fefefe;
-        }
-    }
-}
-
-.todolist_body {
-    margin: 0;
-    padding: 0;
-    background-color: #fff;
-    li {
-        display: flex;
-        align-items: center;
-        padding: 15px 0;
-        &:hover {
-            .todolist-del {
-                display: block;
+.#{$className} {
+    &_header {
+        border-bottom: 1px solid #eee;
+        background-color: #fff;
+        box-shadow: 0 1px 5px rgba(#000, .15);
+        input {
+            border: none;
+            outline: none;
+            width: 100%;
+            padding: 15px;
+            ::placeholder {
+                color: #fefefe;
             }
         }
     }
-    .todolist-radio {
-        width: 40px;
-        height: 40px;
-        margin-right: 10px;
+    &_body {
+        position: relative;
+        margin: 0;
+        padding: 0 15px;
         background-color: #fff;
-        border-radius: 100%;
-        background-image: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22…2none%22%20stroke%3D%22%23ededed%22%20stroke-width%3D%223%22/%3E%3C/svg%3E);
-        &.over {
-            background-color: #f44;
+        box-shadow: 0 1px 5px rgba(#000, .15);
+        li {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            &:hover {
+                .#{$className}-del {
+                    display: block;
+                }
+            }
+        }
+        .#{$className}-radio {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 100%;
+            border: 1px solid #eee;
+            &.over {
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    top: -5px;
+                    bottom: 0;
+                    margin: auto;
+                    width: 18px;
+                    height: 10px;
+                    border-left: 1px solid #5DC2AF;
+                    border-bottom: 1px solid #5DC2AF;
+                    transform: rotate(-45deg);
+                }
+                & + span {
+                    text-decoration: line-through;
+                }
+            }
+        }
+        .#{$className}-del {
+            display: none;
+            padding: 10px;
+            margin-left: auto;
+            cursor: pointer;
         }
     }
-    .todolist-del {
+    &_footer {
         display: none;
-        padding: 10px;
-        margin-left: auto;
-        cursor: pointer;
+        &.show {
+            display: block;
+        }
     }
 }

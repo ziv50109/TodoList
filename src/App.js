@@ -10,6 +10,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            filter: 'all',
             todos: [
                 {
                     id: "8cc64fe1-0706-49b3-b5c2-988e3d926323",
@@ -21,6 +22,11 @@ class App extends Component {
                     text: "買飲料",
                     completed: true
                 },
+                {
+                    id: "f3dfa213-a535-4cc9-808f-422ec5736d74",
+                    text: "認真上班",
+                    completed: true
+                }
             ]
         }
     }
@@ -40,12 +46,12 @@ class App extends Component {
     }
     handleToggleCompleted = (id) => {
         const { todos } = this.state;
-        const newTodos = todos.map(item => {
-            const completed = item.completed;
-            if (item.id === id) {
-                item.completed = !completed;
+        const newTodos = todos.map(ele => {
+            const completed = ele.completed;
+            if (ele.id === id) {
+                ele.completed = !completed;
             }
-            return item;
+            return ele;
         });
         this.setState({ todos: newTodos });
     }
@@ -54,16 +60,34 @@ class App extends Component {
         const newTodos = todos.filter(ele => ele.id !== id);
         this.setState({ todos: newTodos });
     }
+    handleChangeFilter = (filter) => {
+        this.setState({ filter });
+    }
+    handleClearCompleted = () => {
+        const { todos } = this.state;
+        const newTodos = todos.filter(ele => !ele.completed);
+        this.setState({ todos: newTodos });
+    }
 
 
     render() {
-        const { todos } = this.state;
+        const { todos, filter } = this.state;
         const handleAppendTodo = this.handleAppendTodo;
         const handleToggleCompleted = this.handleToggleCompleted;
         const handleDeleteTodo = this.handleDeleteTodo;
+        const handleChangeFilter = this.handleChangeFilter;
+        const handleClearCompleted = this.handleClearCompleted;
 
         return (
-            <Context.Provider value={{ todos, handleAppendTodo, handleToggleCompleted, handleDeleteTodo}}>
+            <Context.Provider value={{
+                todos,
+                filter,
+                handleAppendTodo,
+                handleToggleCompleted,
+                handleDeleteTodo,
+                handleChangeFilter,
+                handleClearCompleted
+            }}>
                 <div className="App">
                     <Header />
                     <TodoLists />

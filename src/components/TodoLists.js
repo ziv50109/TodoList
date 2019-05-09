@@ -2,11 +2,24 @@ import React, { useContext } from "react";
 import Context from "../context";
 
 const TodoLists = () => {
-    const { todos, handleToggleCompleted, handleDeleteTodo } = useContext(Context);
+    const { todos, filter, handleToggleCompleted, handleDeleteTodo } = useContext(Context);
+    let filterTodos;
+    switch (filter) {
+        case 'all':
+        default:
+            filterTodos = todos;
+            break;
+        case 'active':
+            filterTodos = todos.filter(ele => ele.completed);
+            break;
+        case 'completed':
+            filterTodos = todos.filter(ele => !ele.completed);
+            break;
+    }
 
     return (
         <ul className="todolist_body">
-            {todos.map(item => (
+            {filterTodos.map(item => (
                 <li
                     key={item.id}
                 >
